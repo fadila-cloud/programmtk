@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Program Matematika style-2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: blueviolet;
+            padding: 20px;
+        }
+        .container {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            background-color: black;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            margin-top: 0;
+            color: #fff;
+        }
+        input[type="number"], button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: blueviolet;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #4b45a0; 
+        }
+        p {
+            margin: 10px 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bilangan Prima dari 1 hingga 500</h2>
+        <p id="primeNumbers"></p>
+    </div>
+
+    <div class="container">
+        <h2>Hitung Faktorial</h2>
+        <p>Masukkan angka:</p>
+        <input type="number" id="factorialInput" min="0">
+        <button onclick="calculateFactorial()">Hitung</button>
+        <p id="factorialResult"></p>
+    </div>
+
+    <div class="container">
+        <h2>Hitung Luas Lingkaran</h2>
+        <p>Masukkan jari-jari:</p>
+        <input type="number" id="circleRadius" min="0" step="0.01">
+        <button onclick="calculateArea()">Hitung</button>
+        <p id="circleAreaResult"></p>
+    </div>
+
+    <div class="container">
+        <h2>Permainan Tebak Angka</h2>
+        <p>Masukkan tebakan Anda (angka antara 1 dan 100):</p>
+        <input type="number" id="guessNumber" min="1" max="100">
+        <button onclick="checkGuess()">Tebak</button>
+        <p id="guessResult"></p>
+    </div>
+
+    <div class="container">
+        <h2>Bilangan Prima dengan Modifikasi</h2>
+        <p id="modifiedPrimeNumbers"></p>
+    </div>
+
+    <script>
+        // Program 1: Bilangan Prima dari 1 hingga 500
+        function isPrime(num) {
+            if (num < 2) return false; // 0 dan 1 bukan bilangan prima
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        function findPrimeNumbers(limit) {
+            let primes = [];
+            for (let i = 1; i <= limit; i++) {
+                if (isPrime(i)) {
+                    primes.push(i);
+                }
+            }
+            return primes;
+        }
+
+        const primeNumbers = findPrimeNumbers(500);
+        document.getElementById("primeNumbers").innerText = primeNumbers.join(', ');
+
+        // Program 2: Hitung Faktorial
+        function calculateFactorial() {
+            let num = parseInt(document.getElementById("factorialInput").value);
+            if (isNaN(num) || num < 0) {
+                document.getElementById("factorialResult").innerText = "Masukkan angka yang valid!";
+                return;
+            }
+
+            let factorial = 1;
+            for (let i = 1; i <= num; i++) {
+                factorial *= i;
+            }
+
+            document.getElementById("factorialResult").innerText = `Faktorial dari ${num} adalah ${factorial}.`;
+        }
+
+        // Program 3: Hitung Luas Lingkaran
+        function calculateArea() {
+            let radius = parseFloat(document.getElementById("circleRadius").value);
+            if (isNaN(radius) || radius < 0) {
+                document.getElementById("circleAreaResult").innerText = "Masukkan jari-jari yang valid!";
+                return;
+            }
+
+            let area = Math.PI * Math.pow(radius, 2);
+            document.getElementById("circleAreaResult").innerText = `Luas lingkaran dengan jari-jari ${radius} adalah ${area.toFixed(2)}.`;
+        }
+
+        // Program 4: Permainan Tebak Angka
+        let hiddenNumber = Math.floor(Math.random() * 100) + 1;
+
+        function checkGuess() {
+            let guess = parseInt(document.getElementById("guessNumber").value);
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                document.getElementById("guessResult").innerText = "Masukkan angka yang valid antara 1 dan 100!";
+                return;
+            }
+
+            if (guess < hiddenNumber) {
+                document.getElementById("guessResult").innerText = "Tebakan Anda terlalu rendah!";
+            } else if (guess > hiddenNumber) {
+                document.getElementById("guessResult").innerText = "Tebakan Anda terlalu tinggi!";
+            } else {
+                document.getElementById("guessResult").innerText = "Selamat! Anda menebak angka yang benar!";
+            }
+        }
+
+        // Program 5: Bilangan Prima dengan Modifikasi
+        function findAndModifyPrimes(limit) {
+            let modifiedPrimes = [];
+            for (let i = 1; i <= limit; i++) {
+                if (isPrime(i)) {
+                    let primeStr = i.toString();
+                    if (primeStr.includes('1')) {
+                        primeStr = primeStr.split('1').join('1 dan');
+                    }
+                    modifiedPrimes.push(primeStr);
+                }
+            }
+            return modifiedPrimes;
+        }
+
+        const modifiedPrimeNumbers = findAndModifyPrimes(500);
+        document.getElementById("modifiedPrimeNumbers").innerText = modifiedPrimeNumbers.join(', ');
+    </script>
+</body>
+</html>
