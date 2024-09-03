@@ -11,11 +11,11 @@
         .containerjudul { 
             margin-left: 350px;    
             width: 40%;    
-            text-align: center;
+            text-align: center; 
             border: 3px solid; 
             border-radius: 100px;
             background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
         }
         .isi {
             margin-bottom: 30px; 
@@ -55,7 +55,10 @@
         <h2>Bilangan Prima dari 1 hingga 500</h2>
     </div>
     <div class="isi">
-        <p id="primeNumbers"></p>
+        <p>Masukkan Angka:</p>
+        <input type="text" id="primeInput" placeholder="Masukkan Angka">
+        <button onclick="checkPrime()">Hitung</button>
+        <p id="primeResult"></p>
     </div>
 
     <div class="containerjudul">
@@ -63,7 +66,7 @@
     </div>
     <div class="isi">
         <p>Masukkan angka:</p>
-        <input type="number" id="factorialInput" min="0">
+        <input type="number" id="factorialInput" min="0" placeholder="Masukkan Angka">
         <button onclick="calculateFactorial()">Hitung</button>
         <p id="factorialResult"></p>
     </div>
@@ -73,7 +76,7 @@
     </div>
     <div class="isi">
         <p>Masukkan jari-jari:</p>
-        <input type="number" id="circleRadius" min="0" step="0.01">
+        <input type="number" id="circleRadius" min="0" step="0.01" placeholder="Masukkan Angka">
         <button onclick="calculateArea()">Hitung</button>
         <p id="circleAreaResult"></p>
     </div>
@@ -83,7 +86,7 @@
     </div>
     <div class="isi">
         <p>Masukkan tebakan Anda (angka antara 1 dan 100):</p>
-        <input type="number" id="guessNumber" min="1" max="100">
+        <input type="number" id="guessNumber" min="1" max="100" placeholder="Masukkan Angka">
         <button onclick="checkGuess()">Tebak</button>
         <p id="guessResult"></p>
     </div>
@@ -92,31 +95,35 @@
         <h2>Bilangan Prima dengan Modifikasi</h2>
     </div>
     <div class="isi">
-        <p id="modifiedPrimeNumbers"></p>
+        <p>Bilangan Prima dengan Modifikasi</p>
+        <input type="text" id="modified" min="1" max="500" placeholder="Masukkan Angka"> 
+        <button onclick="findAndModifyPrime()">Hitung</button>
+        <p id="modifiedResult"></p>
     </div>
 
     <script>
         // Program 1: Bilangan Prima dari 1 hingga 500
-        function isPrime(num) {
-            if (num < 2) return false; // 0 dan 1 bukan bilangan prima
+        function checkPrime() { 
+            let num = parseInt(document.getElementById("primeInput").value);
+            if (isNaN(num) || num <= 1) {  
+                document.getElementById("primeResult").innerText = "0 dan 1 bukan bilangan prima";
+                return;
+            } 
+
+            let isPrime = true;
             for (let i = 2; i <= Math.sqrt(num); i++) {
-                if (num % i === 0) return false;
-            }
-            return true;
-        }
-
-        function findPrimeNumbers(limit) {
-            let primes = [];
-            for (let i = 1; i <= limit; i++) {
-                if (isPrime(i)) {
-                    primes.push(i);
+                if (num % i === 0) {
+                    isPrime = false;
+                    break;
                 }
-            }
-            return primes;
-        }
+            } 
 
-        const primeNumbers = findPrimeNumbers(500);
-        document.getElementById("primeNumbers").innerText = primeNumbers.join(', ');
+            if (isPrime) {
+                document.getElementById("primeResult").innerText = `${num} adalah bilangan prima.`;
+            } else {
+                document.getElementById("primeResult").innerText = `${num} bukan bilangan prima.`;
+            }
+        }
 
         // Program 2: Hitung Faktorial
         function calculateFactorial() {
@@ -166,22 +173,32 @@
         }
 
         // Program 5: Bilangan Prima dengan Modifikasi
-        function findAndModifyPrimes(limit) {
-            let modifiedPrimes = [];
-            for (let i = 1; i <= limit; i++) {
-                if (isPrime(i)) {
-                    let primeStr = i.toString();
-                    if (primeStr.includes('1')) {
-                        primeStr = primeStr.split('1').join('1 dan');
-                    }
-                    modifiedPrimes.push(primeStr);
+        function findAndModifyPrime() {
+            let num = parseFloat(document.getElementById("modified").value);
+            if (isNaN(num) || num <= 1) {
+                document.getElementById("modifiedResult").innerText = "Masukkan angka bulat positif yang lebih besar dari 1!"; 
+                return; 
+            }
+
+            let isPrime = true;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    isPrime = false;
+                    break;
                 }
             }
-            return modifiedPrimes;
-        }
+            let containsOne = num.toString().includes('1');
 
-        const modifiedPrimeNumbers = findAndModifyPrimes(500);
-        document.getElementById("modifiedPrimeNumbers").innerText = modifiedPrimeNumbers.join(', ');
+            if (isPrime) {
+                let resultText = `${num} adalah bilangan prima!`;
+                if (containsOne) {
+                    resultText += " dan";
+                }
+                document.getElementById("modifiedResult").innerText = resultText;
+            } else {
+                document.getElementById("modifiedResult").innerText = `${num} bukan bilangan prima.`;
+            }
+        }
     </script>
 </body>
 </html>
