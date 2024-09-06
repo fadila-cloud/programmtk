@@ -25,19 +25,19 @@
             border-radius: 30px; 
             padding: 10px;
         }
-        h2 {  
+        h2 {   
             color: black;
         }
         input[type="number"], button {
             background-color: #fff; 
-            padding: 10px;
-            font-size: 16px; 
+            padding: 10px; 
+            font-size: 16px
         }
         button {
             margin-top: 10px;
             cursor: pointer;
             background-color: rgb(23, 89, 130);
-            color: white;
+            color: white; 
             border: none;
             border-radius: 5px;
         }
@@ -56,7 +56,7 @@
     </div>
     <div class="isi">
         <p>Masukkan Angka:</p>
-        <input type="text" id="primeInput" placeholder="Masukkan Angka">
+        <input type="number" id="primeInput" placeholder="Masukkan Angka">
         <button onclick="checkPrime()">Hitung</button>
         <p id="primeResult"></p>
     </div>
@@ -82,11 +82,11 @@
     </div>
 
     <div class="containerjudul">
-        <h2>Permainan Tebak Angka</h2>
+        <h2>Permainan Tebak Angka</h2> 
     </div>
     <div class="isi">
-        <p>Masukkan tebakan Anda (angka antara 1 dan 100):</p>
-        <input type="number" id="guessNumber" min="1" max="100" placeholder="Masukkan Angka">
+        <p>Masukkan tebakan Anda:</p>
+        <input type="number" id="guessNumber" placeholder="Masukkan Angka">
         <button onclick="checkGuess()">Tebak</button>
         <p id="guessResult"></p>
     </div>
@@ -95,8 +95,8 @@
         <h2>Bilangan Prima dengan Modifikasi</h2>
     </div>
     <div class="isi">
-        <p>Bilangan Prima dengan Modifikasi</p>
-        <input type="text" id="modified" min="1" max="500" placeholder="Masukkan Angka"> 
+        <p>Masukkan Bilangan Prima:</p>
+        <input type="number" id="modified" placeholder="Masukkan Angka"> 
         <button onclick="findAndModifyPrime()">Hitung</button>
         <p id="modifiedResult"></p>
     </div>
